@@ -1,9 +1,13 @@
 // imports express, something that helps web building easier 
 import express, { Request, Response } from "express";
 import DeadlockServices from "./services/DeadlockServices";
+import cors from "cors";
 
 // creates an instance of express and sets port. Assume port like door number, so when you go to localhost:3000
 const app = express();
+app.use(cors({
+  origin: "http://localhost:5173"
+}));
 const port = 3000;
 const deadlockServices = new DeadlockServices();
 

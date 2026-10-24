@@ -1,16 +1,16 @@
 import './App.css';
+import SearchBar from './SearchBar';
 
 function App() {
+
+  // Receives the submitted text from searchbar. 
+  function onSearch(query: string) {
+    console.log(query);
+  }
   return (
     <div className="page">
       <h1>Deadlock Tracker</h1>
-
-      <input
-        type="text"
-        placeholder="Search for a player..."
-      />
-
-      <button>Search</button>
+      <SearchBar onSearch={onSearch} />
     </div>
   );
 }
