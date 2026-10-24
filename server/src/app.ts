@@ -1,33 +1,66 @@
-// imports express, something that helps web building easier 
+
 import express, { Request, Response } from "express";
 import DeadlockServices from "./services/DeadlockServices";
 import cors from "cors";
 
-// creates an instance of express and sets port. Assume port like door number, so when you go to localhost:3000
+
+// ==================================================
+// 1. SERVER SETUP
+// ==================================================
+
+// Creates an Express application
 const app = express();
+
+// Allows our React frontend to communicate with Express
 app.use(cors({
   origin: "http://localhost:5173"
 }));
-const port = 3000;
-const deadlockServices = new DeadlockServices();
 
-// defines what happens with someone visits the root URL. When a request is sent, respond with "Hello World!"
+// Backend runs on port 3000
+const port = 3000;
+
+// const deadlockServices = new DeadlockServices();
+
+
+// ==================================================
+// 2. TEST ROUTES
+// ==================================================
+
+// Returns Hello World when visiting localhost:3000
 app.get("/", (req: Request, res: Response) => {
   res.send("Hello World!");
 });
 
-// starts listening on port 3000, it tells the server to start accepting requests
-app.listen(port, () => {
-  console.log(`DeadlockTracker listening on port ${port}`);
-});
-
+// Test API endpoint
 app.get("/api/victor", (req: Request, res: Response) => {
   res.json({ message: "Hello from the API!" });
 });
 
-// Calling API with accountId 1540871133 to get hero stats and return the data as JSON
-// app.get("/api/hero-stats", async (req: Request, res: Response) => {
-//   const data = await deadlockServices.getHeroStatsByHero(1540871133, 66);
-//   res.json(data);
-// });
 
+// ==================================================
+// 3. HERO STATISTICS ROUTE
+// ==================================================
+
+// Receives Account ID and Hero ID from frontend
+app.get("/api/hero-stats", (req: Request, res: Response) => {
+
+  // Gets Account ID from and Hero ID from the URL
+  const accountId = Number(req.query.accountId);
+  const heroId = Number(req.query.heroId);
+
+  console.log("Received Account ID:", accountId);
+  console.log("Received Hero ID:", heroId);
+
+  // Sends confirmation to frontend
+  res.json({ accountId, heroId }); // MODIFIED: includes heroId
+});
+
+
+// ==================================================
+// 4. START SERVER
+// ==================================================
+
+// Starts accepting requests on port 3000
+app.listen(port, () => {
+  console.log(`DeadlockTracker listening on port ${port}`);
+});

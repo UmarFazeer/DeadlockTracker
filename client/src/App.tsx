@@ -4,7 +4,7 @@ import SearchBar from './SearchBar';
 function App() {
 
   // Receives the submitted text from searchbar. 
-  function onSearch(accountId: string) {
+  function onSearch(accountId: string, heroId: string) {
 
   // Converts the string into a number
   const id = Number(accountId);
@@ -15,11 +15,11 @@ function App() {
     return;
   }
 
-    console.log(accountId);
-    console.log(id);
+    console.log("Account ID:", accountId);
+    console.log("Hero ID:", heroId);
 
-    // Sends the accountId to the backend API endpoint
-    fetch(`http://localhost:3000/api/hero-stats?accountId=${id}`)
+    // Sends the accountId and heroId to the backend API endpoint
+    fetch(`http://localhost:3000/api/hero-stats?accountId=${id}&heroId=${heroId}`);
   }
   return (
     <div className="page">
