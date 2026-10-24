@@ -4,8 +4,13 @@ import SearchBar from './SearchBar';
 function App() {
 
   // Receives the submitted text from searchbar. 
-  function onSearch(query: string) {
-    console.log(query);
+  function onSearch(accountId: string) {
+
+  // Converts the string into a number
+  const id = Number(accountId);
+
+    console.log(accountId);
+    console.log(id);
   }
   return (
     <div className="page">
