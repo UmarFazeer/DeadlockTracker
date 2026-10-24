@@ -26,8 +26,8 @@ app.get("/api/victor", (req: Request, res: Response) => {
 });
 
 // Calling API with accountId 1540871133 to get hero stats and return the data as JSON
-app.get("/api/hero-stats", async (req: Request, res: Response) => {
-  const data = await deadlockServices.getHeroStatsByHero(1540871133, 66);
-  res.json(data);
-});
+// app.get("/api/hero-stats", async (req: Request, res: Response) => {
+//   const data = await deadlockServices.getHeroStatsByHero(1540871133, 66);
+//   res.json(data);
+// });
 
