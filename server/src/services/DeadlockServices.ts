@@ -9,7 +9,7 @@ class DeadlockServices {
 
     return data;
   }
-
+  
   // Find hero by ID
   async getHeroStatsByHero(accountId: number, heroId: number){
 

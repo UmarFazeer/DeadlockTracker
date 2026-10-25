@@ -29,6 +29,7 @@ function SearchBar({ onSearch }: SearchBarProps) {
 
   // Converts the 17-digit SteamID64 to an Account ID
   function convertSteamId(steamId: string) {
+    // TODO: Put conversion numnber into constant
     const accountId = BigInt(steamId) - 76561197960265728n;
     return Number(accountId);
   }
@@ -54,6 +55,7 @@ function SearchBar({ onSearch }: SearchBarProps) {
     const accountId = convertSteamId(steamId);
 
     // Checks if the Account ID is within the valid range
+    // TODO: Put upper range in constant
     if (!Number.isInteger(accountId) || accountId <= 0 || accountId > 4294967295) {
       console.log("Invalid Steam ID");
       return;

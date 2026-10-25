@@ -19,8 +19,6 @@ app.use(cors({
 // Backend runs on port 3000
 const port = 3000;
 
-// const deadlockServices = new DeadlockServices();
-
 
 // ==================================================
 // 2. TEST ROUTES
@@ -47,12 +45,28 @@ app.get("/api/hero-stats", (req: Request, res: Response) => {
   // Gets Account ID from and Hero ID from the URL
   const accountId = Number(req.query.accountId);
   const heroId = Number(req.query.heroId);
-
+  const deadlockServices = new DeadlockServices();
   console.log("Received Account ID:", accountId);
   console.log("Received Hero ID:", heroId);
 
+  
+  // Use DeadlockServices to fetch hero stats from the API
+  let heroStatsObject = {};
+  deadlockServices.getHeroStatsByHero(accountId, heroId)
+  .then(heroStats => {
+    console.log("Fetched Hero Stats:", heroStats);
+    heroStatsObject = heroStats;
+    res.json({ accountId, heroId, heroStats: heroStatsObject });
+    console.log("Sending Hero Stats:", heroStatsObject); // MODIFIED: includes heroId and heroStats
+    })
+    .catch(error => {
+      console.error("Error fetching hero stats:", error);
+    });
+  // TODO: Create array that contains hero stats and send it to frontend
+   
+
   // Sends confirmation to frontend
-  res.json({ accountId, heroId }); // MODIFIED: includes heroId
+  // TODO: Add hero stats to the response
 });
 
 
